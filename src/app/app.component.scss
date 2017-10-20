@@ -1,0 +1,87 @@
+.app-container {
+  display: flex;
+  flex-wrap: wrap;
+  height: 100vh;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-image: url('https://images.alphacoders.com/307/thumb-1920-307471.jpg');
+  background-size: cover;
+
+  .series-container {
+    flex-basis: 33%;
+    height: 100%;
+    padding-left: 12px;
+    display: flex;
+    flex-direction: column;
+
+    .card {
+
+      .show {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+
+        .show-image {
+          height: 50px;
+          width: 50px;
+        }
+      }
+    }
+  }
+
+  .episodes-container {
+    flex-basis: 33%;
+    height: 100%;
+    padding-left: 12px;
+    display: flex;
+    flex-direction: column;
+
+    .card {
+
+      .episode {
+        cursor: pointer;
+      }
+    }
+  }
+
+  .video-container {
+    flex-basis: 34%;
+    height: 100%;
+    align-items: center;
+    padding-left: 12px;
+    padding-right: 12px;
+    display: flex;
+    flex-direction: column;
+
+    .card {
+      padding: 0;
+
+      .video-player {
+        width: 100%;
+      }
+    }
+  }
+}
+
+/* Portrait */
+@media screen and (orientation:portrait) {
+  .app-container {
+    .series-container, .episodes-container {
+      flex-basis: 50%;
+    }
+
+    .episodes-container {
+      padding-right: 12px;
+    }
+
+    .video-container {
+      flex-basis: 100%;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+  }
+}
+/* Landscape */
+@media screen and (orientation:landscape) {
+  /* Landscape styles */
+}
