@@ -1,9 +1,10 @@
 body {
   padding: 0;
   margin: 0;
-  background: black;
   font-family: Helvetica, sans-serif;
   min-width: 400px;
+  background-image: url('https://images.alphacoders.com/307/thumb-1920-307471.jpg');
+  background-size: cover;
 }
 
 ul {
@@ -29,11 +30,11 @@ ul {
   -webkit-box-shadow :0 14px 28px rgba(0,0,0,0.25),0 10px 10px rgba(0,0,0,0.22);
   -moz-box-shadow    :0 14px 28px rgba(0,0,0,0.25),0 10px 10px rgba(0,0,0,0.22);
   box-shadow         :0 14px 28px rgba(0,0,0,0.25),0 10px 10px rgba(0,0,0,0.22);
-  padding: 20px;
+  padding: 20px 20px 20px 15px;
 
   .item {
     margin-bottom: 10px;
-    font-size: 22px;
+    font-size: 18px;
     color: rgba(255, 255, 255, 0.55);
     padding-left: 10px;
     padding-top: 5px;
@@ -45,6 +46,11 @@ ul {
     transition: all 250ms ease;
     display: flex;
     align-items: center;
+    min-height: 50px;
+
+    &.selected {
+      background: rgba(255, 0, 0, 0.4)!important;
+    }
 
     &:hover {
       background: rgba(0, 0, 0, 0.3);

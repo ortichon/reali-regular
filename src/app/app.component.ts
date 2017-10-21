@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 //
 import * as _ from 'lodash';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-root',
@@ -26,6 +27,7 @@ export class AppComponent implements OnInit {
   series: Series[];
   selectedSeriesId: number;
   selectedEpisodeId: number;
+  previousHttpRequest: Subscription;
 
   constructor(private http: HttpClient) {}
 
@@ -39,24 +41,30 @@ export class AppComponent implements OnInit {
   }
 
   showSelected(showId: number) {
-    this.videoUrl = null; // remove previous video if exists
+    // cancel previous xhr request if it still on
+    if (this.previousHttpRequest && this.previousHttpRequest.closed === false) {
+      this.previousHttpRequest.unsubscribe();
+    }
+    this.selectedEpisodeId = null;  // remove previous episode if exists
+    this.videoUrl = null;           // remove previous video if exists
     this.selectedSeriesId = showId;
 
     if (this.isShowGotEpisodes()) {
-      this.http.get(`http://tvdb.reali.com/series/${showId}`)
-        .subscribe((res: Episode[]) => this.parseEpisodes(res));
+      this.previousHttpRequest = this.http.get(`http://tvdb.reali.com/series/${showId}`)
+        .subscribe((res: Episode[]) => this.parseEpisodes(res, showId));
     }
   }
 
-  parseEpisodes(episodes: Episode[]) {
-    this.series[this.selectedSeriesId].episodes = episodes;
+  parseEpisodes(episodes: Episode[], showId: number) {
+    this.series[showId].episodes = episodes;
   }
 
   isShowGotEpisodes(): boolean {
     return _.isEmpty(this.series[this.selectedSeriesId].episodes);
   }
 
-  episodeSelected(url: string) {
+  episodeSelected(id: number, url: string) {
+    this.selectedEpisodeId = id;
     this.videoUrl = url;
   }
 }

@@ -3,7 +3,9 @@
     <div class="card-header">Series</div>
     <div class="card">
       <ul *ngFor="let show of series">
-        <li class="item" (click)="showSelected(show.id)">
+        <li class="item"
+            [ngClass]="{'selected': selectedSeriesId === show.id }"
+            (click)="showSelected(show.id)">
           <img class="show-image" [src]="show.image" alt="show image">
           <span>{{ show.title }}</span>
         </li>
@@ -15,7 +17,9 @@
     <div class="card-header">Episodes</div>
     <div class="card">
       <ul *ngFor="let episode of episodes">
-        <li class="item" (click)="episodeSelected(episode.url)">
+        <li class="item"
+            [ngClass]="{'selected': selectedEpisodeId === episode.id }"
+            (click)="episodeSelected(episode.id, episode.url)">
           <span>{{ episode.title }}</span>
         </li>
       </ul>
