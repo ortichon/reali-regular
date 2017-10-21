@@ -4,11 +4,13 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { SeriesComponent } from './series/series.component';
+import { EpisodesComponent } from './episodes/episodes.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SeriesComponent
+    SeriesComponent,
+    EpisodesComponent
   ],
   imports: [
     BrowserModule,

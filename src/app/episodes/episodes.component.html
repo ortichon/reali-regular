@@ -1,0 +1,10 @@
+<div class="card-header">Episodes</div>
+<div class="card">
+  <ul *ngFor="let episode of episodes">
+    <li class="item"
+        [ngClass]="{'selected': selectedEpisodeId === episode.id }"
+        (click)="episodeSelected(episode)">
+      <span>{{ episode.title }}</span>
+    </li>
+  </ul>
+</div>

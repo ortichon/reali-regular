@@ -5,27 +5,27 @@
   padding-top: 10px;
   padding-bottom: 10px;
 
-  .series-container {
-    flex-basis: 33%;
-    height: 100%;
-    padding-left: 12px;
-    display: flex;
-    flex-direction: column;
-
-    .card {
-
-      .show {
-        display: flex;
-        align-items: center;
-        cursor: pointer;
-
-        .show-image {
-          height: 50px;
-          width: 50px;
-        }
-      }
-    }
-  }
+  //.series-container {
+  //  flex-basis: 33%;
+  //  height: 100%;
+  //  padding-left: 12px;
+  //  display: flex;
+  //  flex-direction: column;
+  //
+  //  .card {
+  //
+  //    .show {
+  //      display: flex;
+  //      align-items: center;
+  //      cursor: pointer;
+  //
+  //      .show-image {
+  //        height: 50px;
+  //        width: 50px;
+  //      }
+  //    }
+  //  }
+  //}
 
   .episodes-container {
     flex-basis: 33%;
@@ -64,11 +64,11 @@
 /* Portrait */
 @media screen and (orientation:portrait) {
   .app-container {
-    app-series, .episodes-container {
+    app-series, app-episodes {
       flex-basis: 50%;
     }
 
-    .episodes-container {
+    app-episodes {
       padding-right: 12px;
     }
 

@@ -26,7 +26,6 @@ export class AppComponent implements OnInit {
   videoUrl: string;
   series: Series[];
   selectedSeriesId: number;
-  selectedEpisodeId: number;
   previousHttpRequest: Subscription;
 
   constructor(private http: HttpClient) {}
@@ -45,7 +44,6 @@ export class AppComponent implements OnInit {
     if (this.previousHttpRequest && this.previousHttpRequest.closed === false) {
       this.previousHttpRequest.unsubscribe();
     }
-    this.selectedEpisodeId = null;  // remove previous episode if exists
     this.videoUrl = null;           // remove previous video if exists
     this.selectedSeriesId = showId;
 
@@ -63,9 +61,8 @@ export class AppComponent implements OnInit {
     return _.isEmpty(this.series[this.selectedSeriesId].episodes);
   }
 
-  episodeSelected(id: number, url: string) {
-    this.selectedEpisodeId = id;
-    this.videoUrl = url;
+  episodeSelected(episode: Episode) {
+    this.videoUrl = episode.url;
   }
 }
 

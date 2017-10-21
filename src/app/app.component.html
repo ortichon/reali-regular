@@ -5,18 +5,10 @@
     (showIdChanged)="showSelected($event)">
   </app-series>
 
-  <div class="episodes-container card-container">
-    <div class="card-header">Episodes</div>
-    <div class="card">
-      <ul *ngFor="let episode of episodes">
-        <li class="item"
-            [ngClass]="{'selected': selectedEpisodeId === episode.id }"
-            (click)="episodeSelected(episode.id, episode.url)">
-          <span>{{ episode.title }}</span>
-        </li>
-      </ul>
-    </div>
-  </div>
+  <app-episodes
+    [episodes]="episodes"
+    (episodeChanged)="episodeSelected($event)">
+  </app-episodes>
 
   <div class="video-container card-container">
     <div class="card-header">Video</div>
