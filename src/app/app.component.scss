@@ -64,7 +64,7 @@
 /* Portrait */
 @media screen and (orientation:portrait) {
   .app-container {
-    .series-container, .episodes-container {
+    app-series, .episodes-container {
       flex-basis: 50%;
     }
 

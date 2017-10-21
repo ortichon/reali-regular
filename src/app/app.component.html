@@ -1,17 +1,9 @@
 <div class="app-container">
-  <div class="series-container card-container">
-    <div class="card-header">Series</div>
-    <div class="card">
-      <ul *ngFor="let show of series">
-        <li class="item"
-            [ngClass]="{'selected': selectedSeriesId === show.id }"
-            (click)="showSelected(show.id)">
-          <img class="show-image" [src]="show.image" alt="show image">
-          <span>{{ show.title }}</span>
-        </li>
-      </ul>
-    </div>
-  </div>
+
+  <app-series
+    [series]="series"
+    (showIdChanged)="showSelected($event)">
+  </app-series>
 
   <div class="episodes-container card-container">
     <div class="card-header">Episodes</div>

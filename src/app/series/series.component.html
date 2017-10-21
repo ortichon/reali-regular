@@ -1,3 +1,11 @@
-<p>
-  series works!
-</p>
+<div class="card-header">Series</div>
+<div class="card">
+  <ul *ngFor="let show of series">
+    <li class="item"
+        [ngClass]="{'selected': selectedShowId === show.id }"
+        (click)="showSelected(show.id)">
+      <img class="show-image" [src]="show.image" alt="show image">
+      <span>{{ show.title }}</span>
+    </li>
+  </ul>
+</div>
