@@ -23,11 +23,11 @@ export class AppComponent implements OnInit {
     return [];
   }
 
-  videoUrl: string;
   series: Series[];
+  videoUrl: string;
+  scrollInterval: any;
   selectedSeriesId: number;
   previousHttpRequest: Subscription;
-  interval: any;
 
   constructor(private dataSource: DataSourceService) {}
 
@@ -71,13 +71,13 @@ export class AppComponent implements OnInit {
   }
 
   scrollToBottom(): void {
-    this.interval = setInterval(this.smoothScrollToBottom.bind(this), 10);
+    this.scrollInterval = setInterval(this.smoothScrollToBottom.bind(this), 10);
   }
 
-  smoothScrollToBottom() {
+  smoothScrollToBottom(): void {
     this.appContainer.nativeElement.scrollTop += 20;
     if (this.appContainer.nativeElement.scrollTop >= this.appContainer.nativeElement.scrollHeight / 2) {
-      clearInterval(this.interval);
+      clearInterval(this.scrollInterval);
     }
   }
 }

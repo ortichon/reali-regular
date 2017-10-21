@@ -1,7 +1,7 @@
 :host {
+  display: flex;
   flex-basis: 33%;
+  flex-direction: column;
   height: 100%;
   padding-left: 12px;
-  display: flex;
-  flex-direction: column;
 }

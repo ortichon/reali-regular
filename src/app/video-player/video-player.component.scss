@@ -1,17 +1,17 @@
 :host {
-  flex-basis: 33%;
-  height: 100%;
   align-items: center;
+  display: flex;
+  flex-basis: 33%;
+  flex-direction: column;
+  height: 100%;
   padding-left: 12px;
   padding-right: 12px;
-  display: flex;
-  flex-direction: column;
 
   .card {
-    width: 100%;
-    padding: 0;
-    display: flex;
     align-items: center;
+    display: flex;
+    padding: 0;
+    width: 100%;
 
     .video-player {
       width: 100%;

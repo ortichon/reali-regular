@@ -17,6 +17,7 @@ export class EpisodesComponent {
   get episodes() {
     return this._episodes;
   }
+
   @Output() episodeChanged = new EventEmitter<Episode>();
 
   private _episodes: Episode[];
