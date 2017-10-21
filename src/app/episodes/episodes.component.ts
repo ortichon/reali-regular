@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 //
-import { Episode } from '../app.component';
+import { Episode } from '../models/episode.model';
 
 @Component({
   selector: 'app-episodes',

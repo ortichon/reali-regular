@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { SeriesComponent } from './series/series.component';
 import { EpisodesComponent } from './episodes/episodes.component';
 import { VideoPlayerComponent } from './video-player/video-player.component';
+import { DataSourceService } from './services/data-source.service';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import { VideoPlayerComponent } from './video-player/video-player.component';
     BrowserModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [DataSourceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

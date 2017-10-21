@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 //
 import * as _ from 'lodash';
 import { Subscription } from 'rxjs/Subscription';
+//
+import { Episode } from './models/episode.model';
+import { Series } from './models/series.model';
+import { DataSourceService } from './services/data-source.service';
 
 @Component({
   selector: 'app-root',
@@ -11,70 +14,70 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class AppComponent implements OnInit {
 
-  private _episodes: Episode[];
+  @ViewChild('appContainer') appContainer: ElementRef;
 
   get episodes(): Episode[]{
-    if (!_.isNil(this.selectedSeriesId)) {
+    if (!_.isNil(this.selectedSeriesId)) { // could be 0 so we check for null/undefined
       return this.series[this.selectedSeriesId].episodes;
     }
     return [];
   }
 
-  set episodes(value: Episode[]) {
-    this._episodes = value;
-  }
   videoUrl: string;
   series: Series[];
   selectedSeriesId: number;
   previousHttpRequest: Subscription;
+  interval: any;
 
-  constructor(private http: HttpClient) {}
+  constructor(private dataSource: DataSourceService) {}
 
   ngOnInit() {
     this.loadSeries();
   }
 
-  loadSeries() {
-    this.http.get('http://tvdb.reali.com/series')
+  loadSeries(): void {
+    this.dataSource.getSeries()
       .subscribe((res: Series[]) => this.series = res);
   }
 
-  showSelected(showId: number) {
-    // cancel previous xhr request if it still on
-    if (this.previousHttpRequest && this.previousHttpRequest.closed === false) {
-      this.previousHttpRequest.unsubscribe();
-    }
-    this.videoUrl = null;           // remove previous video if exists
+  showSelected(showId: number): void {
+    this.handlePreviousHttpRequest();
+    this.videoUrl = null; // remove previous video if exists
     this.selectedSeriesId = showId;
 
-    if (this.isShowGotEpisodes()) {
-      this.previousHttpRequest = this.http.get(`http://tvdb.reali.com/series/${showId}`)
+    if (this.isShowGotNoEpisodes()) {
+      this.previousHttpRequest = this.dataSource.getEpisodes(showId)
         .subscribe((res: Episode[]) => this.parseEpisodes(res, showId));
     }
   }
 
-  parseEpisodes(episodes: Episode[], showId: number) {
+  handlePreviousHttpRequest(): void {
+    // cancel previous xhr request if it still on
+    if (this.previousHttpRequest && this.previousHttpRequest.closed === false) {
+      this.previousHttpRequest.unsubscribe();
+    }
+  }
+
+  parseEpisodes(episodes: Episode[], showId: number): void {
     this.series[showId].episodes = episodes;
   }
 
-  isShowGotEpisodes(): boolean {
+  isShowGotNoEpisodes(): boolean {
     return _.isEmpty(this.series[this.selectedSeriesId].episodes);
   }
 
-  episodeSelected(episode: Episode) {
+  episodeSelected(episode: Episode): void {
     this.videoUrl = episode.url;
   }
-}
 
-export interface Series {
-  id: number;
-  title: string;
-  image: string;
-  episodes?: Episode[];
-}
+  scrollToBottom(): void {
+    this.interval = setInterval(this.smoothScrollToBottom.bind(this), 10);
+  }
 
-export interface Episode {
-  id: number;
-  title: string;
-  url: string;
+  smoothScrollToBottom() {
+    this.appContainer.nativeElement.scrollTop += 20;
+    if (this.appContainer.nativeElement.scrollTop >= this.appContainer.nativeElement.scrollHeight / 2) {
+      clearInterval(this.interval);
+    }
+  }
 }

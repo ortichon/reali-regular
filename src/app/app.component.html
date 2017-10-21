@@ -1,4 +1,4 @@
-<div class="app-container">
+<div #appContainer class="app-container">
 
   <app-series
     [series]="series"
@@ -13,5 +13,9 @@
   <app-video-player
     [videoUrl]="videoUrl">
   </app-video-player>
+
+  <button class="scroll-button" (click)="scrollToBottom()">
+    <img src="../assets/images/arrow-down.png" alt="scroll to bottom">
+  </button>
 
 </div>
