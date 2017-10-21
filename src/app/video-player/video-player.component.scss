@@ -1,0 +1,17 @@
+:host {
+  flex-basis: 33%;
+  height: 100%;
+  align-items: center;
+  padding-left: 12px;
+  padding-right: 12px;
+  display: flex;
+  flex-direction: column;
+
+  .card {
+    padding: 0;
+
+    .video-player {
+      width: 100%;
+    }
+  }
+}

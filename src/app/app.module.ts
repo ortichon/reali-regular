@@ -5,12 +5,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { SeriesComponent } from './series/series.component';
 import { EpisodesComponent } from './episodes/episodes.component';
+import { VideoPlayerComponent } from './video-player/video-player.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SeriesComponent,
-    EpisodesComponent
+    EpisodesComponent,
+    VideoPlayerComponent
   ],
   imports: [
     BrowserModule,
