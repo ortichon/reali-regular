@@ -6,6 +6,26 @@
   padding-bottom: 10px;
   overflow: auto;
 
+  .error-message {
+    background: rgba(255, 0, 0, 0.6);
+    color: rgba(255, 255, 255, 0.6);
+    height: 30px;
+    left: 12px;
+    line-height: 30px;
+    position: fixed;
+    right: 12px;
+    text-align: center;
+    top: 36px;
+    z-index: 999;
+
+    .close-error {
+      cursor: pointer;
+      position: absolute;
+      right: 5px;
+      top: 0;
+    }
+  }
+
   .scroll-button {
     position: fixed;
     bottom: 15px;
@@ -24,28 +44,45 @@
       top: 3px;
     }
   }
+
+  .back {
+    background: rgba(255, 255, 255, 0.5);
+    border: 0;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 18px;
+    height: 21px;
+    left: 12px;
+    outline: none;
+    position: fixed;
+    top: 10px;
+    visibility: hidden;
+    width: 40px;
+    z-index: 10;
+
+  }
 }
 
 /* Portrait */
 @media screen and (orientation:portrait) {
-  .app-container {
+ .app-container {
 
-    .scroll-button {
-      visibility: visible;
-    }
+   .scroll-button {
+     visibility: visible;
+   }
 
-    app-series, app-episodes {
-      flex-basis: 50%;
-    }
+   app-series, app-episodes {
+     flex-basis: 50%;
+   }
 
-    app-episodes {
-      padding-right: 12px;
-    }
+   app-episodes {
+     padding-right: 12px;
+   }
 
-    app-video-player {
-      flex-basis: 100%;
-      margin-top: 10px;
-      margin-bottom: 10px;
-    }
-  }
+   app-video-player {
+     flex-basis: 100%;
+     margin-top: 10px;
+     margin-bottom: 10px;
+   }
+ }
 }
