@@ -27,7 +27,7 @@ export class DataSourceService {
   }
 
   getEpisodes(showId: number): Observable<Episode[]> {
-    return this.http.get(${this.baseUrl}/${showId})
+    return this.http.get(`${this.baseUrl}/${showId}`)
       .map((res: Response) => res.json())
       .catch((err: any) => DataSourceService.handleError(err));
   }
