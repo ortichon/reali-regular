@@ -6,8 +6,8 @@
     {{ error }}
     <div class="close-error" (click)="clearErrorMessage()">x</div>
   </div>
-
-  <button *ngIf="isEpisodesShown" class="back" (click)="back()">«/button>
+  
+  <button *ngIf="isEpisodesShown" class="back" (click)="back()"><</button>
 
   <app-series
     [series]="series"
@@ -28,4 +28,3 @@
   </button>
 
 </div>
-  
