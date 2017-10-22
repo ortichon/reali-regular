@@ -1,4 +1,13 @@
-<div #appContainer class="app-container">
+<div #appContainer
+     class="app-container"
+     [ngClass]="{'episodes-shown': isEpisodesShown, 'video-shown': isVideoShown}">
+
+  <div *ngIf="error" class="error-message">
+    {{ error }}
+    <div class="close-error" (click)="clearErrorMessage()">x</div>
+  </div>
+
+  <button *ngIf="isEpisodesShown" class="back" (click)="back()">«/button>
 
   <app-series
     [series]="series"
@@ -19,3 +28,4 @@
   </button>
 
 </div>
+  
