@@ -23,9 +23,12 @@ export class AppComponent implements OnInit {
     return [];
   }
 
+  error: string;
   series: Series[];
   videoUrl: string;
   scrollInterval: any;
+  isVideoShown: boolean;
+  isEpisodesShown: boolean;
   selectedSeriesId: number;
   previousHttpRequest: Subscription;
 
@@ -37,17 +40,30 @@ export class AppComponent implements OnInit {
 
   loadSeries(): void {
     this.dataSource.getSeries()
-      .subscribe((res: Series[]) => this.series = res);
+      .subscribe(
+        (res: Series[]) => {
+          this.clearErrorMessage();
+          this.series = res;
+        },
+        (error: any) => this.error = 'Could not load series'
+      );
   }
 
   showSelected(showId: number): void {
+    this.isEpisodesShown = true;
     this.handlePreviousHttpRequest();
     this.videoUrl = null; // remove previous video if exists
     this.selectedSeriesId = showId;
 
     if (this.isShowGotNoEpisodes()) {
       this.previousHttpRequest = this.dataSource.getEpisodes(showId)
-        .subscribe((res: Episode[]) => this.parseEpisodes(res, showId));
+        .subscribe(
+          (res: Episode[]) => {
+            this.clearErrorMessage();
+            this.parseEpisodes(res, showId);
+          },
+          (error: any) => this.error = 'Could not load episodes'
+        );
     }
   }
 
@@ -67,6 +83,7 @@ export class AppComponent implements OnInit {
   }
 
   episodeSelected(episode: Episode): void {
+    this.isVideoShown = true;
     this.videoUrl = episode.url;
   }
 
@@ -79,5 +96,21 @@ export class AppComponent implements OnInit {
     if (this.appContainer.nativeElement.scrollTop >= this.appContainer.nativeElement.scrollHeight / 2) {
       clearInterval(this.scrollInterval);
     }
+  }
+
+  back() {
+    this.clearErrorMessage();
+
+    if (this.isVideoShown) {
+      this.videoUrl = null;
+      this.isVideoShown = false;
+      return;
+    }
+
+    this.isEpisodesShown = false;
+  }
+
+  clearErrorMessage(): void {
+    this.error = null;
   }
 }
